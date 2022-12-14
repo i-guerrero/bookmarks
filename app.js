@@ -12,5 +12,9 @@ app.get('/', (req, res) => {
 
 app.use("/bookmarks", bookmarksController);
 
+app.get('*', (req, res) => {
+    res.json({ error: "Page not found" });
+})
+
 // EXPORT
 module.exports = app;
