@@ -6,4 +6,24 @@ bookmarks.get('/', (req, res) => {
     res.json(bookmarksArray)
 });
 
+// SHOW
+bookmarks.get("/:arrayIndex", (req, res) => {
+    const { arrayIndex } = req.params;
+    if (bookmarksArray[arrayIndex]) {
+
+    res.json(bookmarksArray[arrayIndex]);
+    } else {
+        res.status(404).json({
+            error: "Not found"
+        });
+    }
+});
+
+// CREATE
+
+bookmarks.post("/", (req, res) => {
+    bookmarksArray.push(req.body)
+    res.json(bookmarksArray[bookmarksArray.length - 1])
+});
+
 module.exports = bookmarks
