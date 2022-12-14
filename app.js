@@ -5,6 +5,14 @@ const bookmarksController = require('./controllers/bookmarksController.js');
 // CONFIGURATION
 const app = express();
 
+// MIDDLEWARE
+app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log("This code runs for every request");
+    next();
+  });
+
 // ROUTES
 app.get('/', (req, res) => {
     res.send('Welcome to Bookmarks App');

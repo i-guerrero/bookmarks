@@ -1,6 +1,8 @@
 const express = require('express')
 const bookmarks = express.Router()
 const bookmarksArray = require("../models/bookmark.js")
+const { validateURL } = require("../models/validations.js")
+
 
 bookmarks.get('/', (req, res) => {
     res.json(bookmarksArray)
@@ -21,7 +23,7 @@ bookmarks.get("/:arrayIndex", (req, res) => {
 
 // CREATE
 
-bookmarks.post("/", (req, res) => {
+bookmarks.post("/", validateURL, (req, res, next) => {
     bookmarksArray.push(req.body)
     res.json(bookmarksArray[bookmarksArray.length - 1])
 });
